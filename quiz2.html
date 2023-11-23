@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phoenix Comic Character Quiz</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .quiz-option {
+            margin: 10px;
+        }
+
+        #next-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #next-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Question 2</h2>
+        <p>How funny are you?</p>
+        <div class="quiz-options">
+            <label class="quiz-option">
+                <input type="radio" name="answer" value="not-funny-at-all"> Not funny at all
+            </label>
+            <label class="quiz-option">
+                <input type="radio" name="answer" value="quite-funny"> Quite funny
+            </label>
+            <label class="quiz-option">
+                <input type="radio" name="answer" value="very-funny"> Very funny
+            </label>
+        </div>
+        <button id="next-button" onclick="nextQuestion()">Next</button>
+    </div>
+
+    <script>
+        function nextQuestion() {
+            // You can add logic here to handle the user's selection and navigate to the next question.
+            // For simplicity, this example just redirects to the next question page (quiz2.html).
+            window.location.href = "quiz3.html";
+        }
+    </script>
+</body>
+</html>
