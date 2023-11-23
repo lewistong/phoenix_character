@@ -94,15 +94,16 @@
                     scores.Doggo += 10;
                     break;
                 case "human":
-                    // Add scoring logic for other characters if needed
+                    scores.Fawn += 10;
+                    scores.Gorebrah +=10;
+                    scores.Tosh +=10;
                     break;
                 case "cat":
-                    // Add scoring logic for other characters if needed
+                    scores.Looshkin += 10;
                     break;
                 case "bunny":
                     scores.Bunny += 10;
                     break;
-                // Add cases for other answers if needed
             }
             // Save scores to local storage
             localStorage.setItem('scores', JSON.stringify(scores));
