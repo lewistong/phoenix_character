@@ -65,13 +65,56 @@
             </label>
         </div>
         <button id="next-button" onclick="nextQuestion()">Next</button>
+        <div id="current-scores">
+            <p>Scores from previous question</p>
+            <ul id="previous-scores-list"></ul>
+        </div>
     </div>
 
     <script>
+        const characters = ["Bunny", "Looshkin", "Doggo", "Fawn", "Gorebrah", "Tosh"];
+        // Function to update scores based on user's answer
+        function updateScores(answer) {
+            // Retrieve scores from local storage
+            let scores = JSON.parse(localStorage.getItem('scores')) || {};
+
+            switch (answer) {
+                case "mind":
+                    scores.Tosh +=10;
+                    break;
+                case "real-life":
+                    scores.Gorebrah +=10;
+                    scores.Bunny += 10;
+                    scores.Doggo +=10;
+                    scores.Looshkin +10;
+                    scores.Fawn +=10;
+                    break;
+            }
+            // Save scores to local storage
+            localStorage.setItem('scores', JSON.stringify(scores));
+        }
+        const previousScores = JSON.parse(localStorage.getItem('scores')) || {};
+        const previousScoresList = document.getElementById("previous-scores-list");
+        for (const character in previousScores) {
+            const listItem = document.createElement("li");
+            listItem.textContent = `${character}: ${previousScores[character]} points`;
+            previousScoresList.appendChild(listItem);
+        }
         function nextQuestion() {
-            // You can add logic here to handle the user's selection and navigate to the next question.
-            // For simplicity, this example just redirects to the next question page (quiz2.html).
-            window.location.href = "quiz4.html";
+            // Get the selected answer
+            const selectedAnswer = document.querySelector('input[name="answer"]:checked');
+
+            // Check if an answer is selected
+            if (selectedAnswer) {
+                // Update scores based on the selected answer
+                updateScores(selectedAnswer.value);
+
+                // Redirect to the next question page (quiz2.html)
+                window.location.href = "quiz4.html";
+            } else {
+                // Display an alert if no answer is selected
+                alert("Please select an answer before proceeding to the next question.");
+            }
         }
     </script>
 </body>

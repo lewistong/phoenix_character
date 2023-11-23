@@ -68,7 +68,12 @@
             </label>
         </div>
         <button id="next-button" onclick="nextQuestion()">Next</button>
+        <div id="current-scores">
+            <p>Scores from previous question</p>
+            <ul id="previous-scores-list"></ul>
+        </div>
     </div>
+
 
     <script>
         // Function to update scores based on user's answer
@@ -93,7 +98,13 @@
             // Save scores to local storage
             localStorage.setItem('scores', JSON.stringify(scores));
         }
-
+        const previousScores = JSON.parse(localStorage.getItem('scores')) || {};
+        const previousScoresList = document.getElementById("previous-scores-list");
+        for (const character in previousScores) {
+            const listItem = document.createElement("li");
+            listItem.textContent = `${character}: ${previousScores[character]} points`;
+            previousScoresList.appendChild(listItem);
+        }
         function nextQuestion() {
             // Get the selected answer
             const selectedAnswer = document.querySelector('input[name="answer"]:checked');

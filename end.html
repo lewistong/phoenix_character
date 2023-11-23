@@ -46,6 +46,8 @@
         <h2>Quiz Result</h2>
         <p>Congratulations! You are...</p>
         <h1 id="result"></h1>
+        <p>Your scores:</p>
+        <ul id="scores-list"></ul>
         <button id="retry-button" onclick="retryQuiz()">Retry Quiz</button>
     </div>
 
@@ -53,8 +55,23 @@
         // Characters array
         const characters = ["Bunny", "Looshkin", "Doggo", "Fawn", "Gorebrah", "Tosh"];
 
-        // Display result on page load
+        // Display result and scores on page load
         document.getElementById("result").textContent = getHighestScoreCharacter();
+        displayScores();
+
+        // Function to display scores
+        function displayScores() {
+            // Retrieve scores from local storage
+            const scores = JSON.parse(localStorage.getItem('scores')) || {};
+
+            // Display scores in a list
+            const scoresList = document.getElementById("scores-list");
+            characters.forEach(character => {
+                const listItem = document.createElement("li");
+                listItem.textContent = `${character}: ${scores[character] || 0} points`;
+                scoresList.appendChild(listItem);
+            });
+        }
 
         // Function to get the character with the highest score
         function getHighestScoreCharacter() {
