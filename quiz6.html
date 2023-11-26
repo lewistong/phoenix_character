@@ -65,14 +65,16 @@
             </label>
         </div>
         <button id="next-button" onclick="nextQuestion()">Next</button>
-        <div id="current-scores">
-            <p>Scores from previous question</p>
-            <ul id="previous-scores-list"></ul>
+        <div id="current-character">
+            <p>So far you would be...</p>
+            <h1 id="result"></h1>
+        </div>
+        <div id="character-image-container">
+                <img id="result-image" src="" alt="Result Character Image">
         </div>
     </div>
 
     <script>
-        const characters = ["Bunny", "Looshkin", "Doggo", "Fawn", "Gorebrah", "Tosh"];
         // Function to update scores based on user's answer
         function updateScores(answer) {
             // Retrieve scores from local storage
@@ -88,13 +90,69 @@
             // Save scores to local storage
             localStorage.setItem('scores', JSON.stringify(scores));
         }
-        const previousScores = JSON.parse(localStorage.getItem('scores')) || {};
-        const previousScoresList = document.getElementById("previous-scores-list");
-        for (const character in previousScores) {
-            const listItem = document.createElement("li");
-            listItem.textContent = `${character}: ${previousScores[character]} points`;
-            previousScoresList.appendChild(listItem);
+        // not sure why this is here but it's creating. constant with eahc character name
+        const characters = ["Bunny", "Looshkin", "Doggo", "Fawn", "Gorebrah", "Tosh"];
+        
+        // Function to get the character with the highest score
+        function getHighestScoreCharacter() {
+            // Retrieve scores from local storage
+            const scores = JSON.parse(localStorage.getItem('scores')) || {};
+
+            let highestScore = -1;
+            let winningCharacter = "";
+
+            // Loop through each character and find the one with the highest score
+            characters.forEach(character => {
+                if (scores[character] > highestScore) {
+                    highestScore = scores[character];
+                    winningCharacter = character;
+                }
+            });
+
+            return winningCharacter;
         }
+    
+        // Display the character image based on the highest score
+        const resultImage = document.getElementById("result-image");
+        const highestScoreCharacter = getHighestScoreCharacter();
+        document.getElementById("result").textContent = highestScoreCharacter;
+
+
+        
+        // Function to update the character image
+        function updateCharacterImage() {
+        const resultImage = document.getElementById("result-image");
+        const highestScoreCharacter = getHighestScoreCharacter();
+        document.getElementById("result").textContent = highestScoreCharacter;
+
+        // Set the image source based on the highest scoring character
+        resultImage.src = getImageSource(highestScoreCharacter);
+    }
+
+        // Function to get the image source based on the character
+        function getImageSource(character) {
+            // You can customize the image sources based on your file structure
+            switch (character) {
+                case "Bunny":
+                    return "images/bunny.png";
+                case "Looshkin":
+                    return "images/looshkin.png";
+                case "Doggo":
+                    return "images/doggo.png";
+                case "Fawn":
+                    return "images/fawn.png";
+                case "Gorebrah":
+                    return "images/gorebrah.png";
+                case "Tosh":
+                    return "images/tosh.png";    
+                default:
+                    return ""; // Default image source
+            }
+        }
+
+        // Call the function to update the character image initially
+        updateCharacterImage();
+
         function nextQuestion() {
             // Get the selected answer
             const selectedAnswer = document.querySelector('input[name="answer"]:checked');
