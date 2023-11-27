@@ -11,6 +11,6 @@
                 window.location.href = nextPage;
             } else {
                 // Display an alert if no answer is selected
-                alert("Please select an answer before proceeding to the next question.");
+                alert("Don't be a dumb-dumb, you need to choose an option!");
             }
         }
