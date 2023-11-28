@@ -35,6 +35,12 @@ h2 {
     margin: 20px 0;
 }
 
+.quiz-options {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
 .quiz-option {
     background-color: #3498db;
     color: #fff;
@@ -43,20 +49,12 @@ h2 {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    width: 100%; /* Make the options full width */
+    box-sizing: border-box; /* Include padding and border in the total width */
 }
 
 .quiz-option:hover {
     background-color: #2980b9;
-}
-
-#next-button, #retry-button{
-    background-color: #2ecc71;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
 #next-button, #retry-button:hover {
@@ -83,4 +81,9 @@ li {
     border-radius: 5px;
     transition: background-color 0.3s ease;
 }
+
+@media screen and (max-width: 600px) {
+    .quiz-option {
+        width: 100%; /* Make the options full width on smaller screens */
+    }
 </style>
